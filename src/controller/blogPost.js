@@ -9,12 +9,23 @@ module.exports={
 list:async(req, res)=>{
 
         // const data=await Blog.find().populate('categoryId')
+        
+        //! Searching  URL?search[key1]=value1&search[key2]=value2
+        //? https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+
         const search =req.query?.search || {}
         for(let key in search) search[key]= {$regex: search[key], $options: "i"}  // icinde arama yapabilmek icin regex olarak yazdik
 
+        //! Sorting   URL?sort[key1]=1&sort[key2]=-1 (1=ASC, -1=DESC)
+        //? https://www.bmc.com/blogs/mongodb-sorting
+        const sort = req.query?.sort || {}
         
+        //! Pagination  URL?page=1&limit=10
+        const limit= Number(req.query?.limit || (process.env?.PAGE_SIZE || 20))
+        let page= Number(req.query?.page || 1 )-1 
+        const skip= Number(req.query?.skip) || (page*limit)
 
-        const data=await Blog.find(search)
+        const data=await Blog.find(search).sort(sort).skip(skip).limit(limit)
 
         res.status(200).send({
             error:false,
