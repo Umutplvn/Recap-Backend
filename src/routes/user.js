@@ -12,4 +12,9 @@ router.route('/:userId')
 .put(User.update)
 .delete(User.delete)
 
+// Login
+
+router.post('/login', User.login)
+
+
 module.exports= router
