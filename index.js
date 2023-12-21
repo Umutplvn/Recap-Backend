@@ -27,10 +27,20 @@ dbConnection()
 //* Accept JSON:
 // app.use('/', express.json()) //alttaki ile ayni
 app.use(express.json())
+/* ------------------------------------------------------- */
 
+//$ npm i cookie-session
+
+const session = require('cookie-session')
+
+app.use(session({
+    secret:process.env.SECRET_KEY || "secret_Key_For_Cookies",
+    // name:'cookie  //default: req.session
+    // maxAge: 1000*60*60*24 //1 day (milisecond)
+}))
 
 /* ------------------------------------------------------- *
-//! Routes
+! Routes
 
 app.get('/', (req,res)=>{
     res.send({

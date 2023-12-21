@@ -3,6 +3,11 @@
 const router=require('express').Router()
 const User = require('../controller/user')
 
+// Login-logout
+router.post('/login', User.login)
+router.all('/logout', User.logout)
+
+
 router.route('/')
 .get(User.list)
 .post(User.create)
@@ -12,9 +17,7 @@ router.route('/:userId')
 .put(User.update)
 .delete(User.delete)
 
-// Login
 
-router.post('/login', User.login)
 
 
 module.exports= router

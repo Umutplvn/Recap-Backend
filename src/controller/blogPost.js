@@ -8,7 +8,13 @@ module.exports={
 
 list:async(req, res)=>{
 
-        const data=await Blog.find().populate('categoryId')
+        // const data=await Blog.find().populate('categoryId')
+        const search =req.query?.search || {}
+        for(let key in search) search[key]= {$regex: search[key], $options: "i"}  // icinde arama yapabilmek icin regex olarak yazdik
+
+        
+
+        const data=await Blog.find(search)
 
         res.status(200).send({
             error:false,

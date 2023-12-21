@@ -20,6 +20,11 @@ password:{
     required:true,
     set:(password)=>passwordEncrypt(password)
 
+},
+
+rememberMe:{
+    type:Boolean,
+    required:false
 }
 
 },
