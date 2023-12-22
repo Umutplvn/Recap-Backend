@@ -7,7 +7,8 @@ module.exports={
 
 list:async(req, res)=>{
 
-        const data=await Category.find()
+        // const data=await Category.find()
+        const data= await req.getModelList(Category)
 
         res.status(200).send({
             error:false,

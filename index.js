@@ -21,6 +21,9 @@ require('express-async-errors')
 const { dbConnection } = require('./src/configs/dbConnection')
 dbConnection()
 
+//* Searching, sorting, pagination
+app.use(require('./src/middlewares/findSearchSortPage'))
+
 /* ------------------------------------------------------- */
 //! Middlewares:
 
