@@ -3,9 +3,9 @@
 const router=require('express').Router()
 const User = require('../controller/user')
 
-// Login-logout
-router.post('/login', User.login)
-router.all('/logout', User.logout)
+// Login-logout - Session Cookies
+// router.post('/login', User.login)
+// router.all('/logout', User.logout)
 
 
 router.route('/')

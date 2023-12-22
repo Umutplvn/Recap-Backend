@@ -53,42 +53,42 @@ module.exports = {
     })
   },
 
-  login: async (req, res) => {
-    const { email, password } = req.body;
+//   login: async (req, res) => {
+//     const { email, password } = req.body;
 
-    if (email && password) {
-      // const user = await User.findOne({email: email, password:passwordEncrypt(password)}) buna gerek yok cunku modelde set metodunu kullalndiigimiz icin buna gerek yok
-      const user = await User.findOne({ email: email, password: password });
-      if (user) {
+//     if (email && password) {
+//       // const user = await User.findOne({email: email, password:passwordEncrypt(password)}) buna gerek yok cunku modelde set metodunu kullalndiigimiz icin buna gerek yok
+//       const user = await User.findOne({ email: email, password: password });
+//       if (user) {
 
-        req.session={
-            user:{
-                email: user.email,
-                password: user.password
-            }
-        }
-        if(req.body?.rememberMe){
-            req.sessionOptions.maxAge= 1000*60*60*24*3 //3 days
-        }
+//         req.session={
+//             user:{
+//                 email: user.email,
+//                 password: user.password
+//             }
+//         }
+//         if(req.body?.rememberMe){
+//             req.sessionOptions.maxAge= 1000*60*60*24*3 //3 days
+//         }
 
-        res.status(200).send({
-          error: false,
-          result: user,
-        })
-      } else {
-        res.errorStatusCode = 401;
-        throw new Error("Login parameters are not valid.");
-      }
-    } else {
-      res.errorStatusCode = 401;
-      throw new Error("Email and password are required.");
-    }
-  },
+//         res.status(200).send({
+//           error: false,
+//           result: user,
+//         })
+//       } else {
+//         res.errorStatusCode = 401;
+//         throw new Error("Login parameters are not valid.");
+//       }
+//     } else {
+//       res.errorStatusCode = 401;
+//       throw new Error("Email and password are required.");
+//     }
+//   },
 
-  logout: async(req, res)=>{
-    req.session = null, // cookie-session
-    res.status(200).send({
-        error:false
-    })
-}
+//   logout: async(req, res)=>{
+//     req.session = null, // cookie-session
+//     res.status(200).send({
+//         error:false
+//     })
+// }
 };

@@ -30,7 +30,7 @@ app.use(require('./src/middlewares/findSearchSortPage'))
 //* Accept JSON:
 // app.use('/', express.json()) //alttaki ile ayni
 app.use(express.json())
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 
 //$ npm i cookie-session
 
@@ -43,7 +43,30 @@ app.use(session({
 }))
 
 /* ------------------------------------------------------- */
+//Session Cookies yerine jwt ile kontrol
+const jwt = require('jsonwebtoken')
 
+app.use((req, res, next)=>{
+    const auth= req.headers?.authorization || null
+    const accessToken= auth ? auth.split(' ')[1] : null // jwt tokeni aldik
+
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN, function(err, user){
+        if(err){
+            req.user =null
+            console.log('JWT Login: NO');
+        }else{
+            req.user = user
+            console.log('JWT Login: YES');
+        }
+    })
+
+    next()
+})
+
+
+/* ------------------------------------------------------- */
+
+app.use('/auth', require('./src/routes/auth.router'))
 app.use('/user', require('./src/routes/user'))
 app.use('/category', require('./src/routes/category'))
 app.use('/blog', require('./src/routes/blogPost'))
