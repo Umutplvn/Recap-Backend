@@ -10,7 +10,7 @@ router.route('/')
 
 router.route('/:blogId')
 .get(permissions.isLogin, Blog.read)
-.put(permissions.isOwner, Blog.update)
-.delete(permissions.isOwner, Blog.delete)
+.put(Blog.update)
+.delete(Blog.delete)
 
 module.exports= router
