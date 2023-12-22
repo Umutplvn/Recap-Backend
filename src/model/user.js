@@ -3,15 +3,14 @@ const mongoose =require('mongoose')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 const userSchema = new mongoose.Schema({
 
-email:{
+username:{
     type:String,
     trim:true,
-    unique:true,
     required:true,
-    validate:[ 
-        (email)=> (email.includes('@') && email.includes('.')), 'Email is not valid'
-        // (email)=>{ return (email.indexOf('@' && email.indexOf('.')))}, 'Email is not valid'
-    ]
+    // validate:[ 
+    //     (email)=> (email.includes('@') && email.includes('.')), 'Email is not valid'
+    //     // (email)=>{ return (email.indexOf('@' && email.indexOf('.')))}, 'Email is not valid'
+    // ]
 },
 
 password:{
@@ -25,6 +24,24 @@ password:{
 rememberMe:{
     type:Boolean,
     required:false
+},
+
+name:{
+    type:String,
+    trim:true,
+    required:true,
+},
+
+lastname:{
+    type:String,
+    trim:true,
+    required:true,
+},
+
+image:{
+    type:String,
+    trim:true,
+    required:true,
 }
 
 },

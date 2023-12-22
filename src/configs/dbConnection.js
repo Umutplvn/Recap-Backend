@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    EXPRESS - Personnel API
+    EXPRESS - Blog API
 ------------------------------------------------------- */
 // MongoDB Connection:
 

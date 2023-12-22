@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    EXPRESS - Personnel API
+    EXPRESS - Blog API
 ------------------------------------------------------- */
 
 const express = require('express')
@@ -41,27 +41,6 @@ app.use(session({
     // name:'cookie  //default: req.session
     // maxAge: 1000*60*60*24 //1 day (milisecond)
 }))
-
-/* ------------------------------------------------------- *
-! Routes
-
-app.get('/', (req,res)=>{
-    res.send({
-        error:false,
-        message:"Welcome Personnel API"
-    })
-})
-
-
-// HomePath:
-app.all('/', (req, res) => {
-    res.send({
-        error: false,
-        message: 'Welcome to PERSONNEL API',
-        session: req.session,
-        isLogin: req.isLogin
-    })
-})
 
 /* ------------------------------------------------------- */
 

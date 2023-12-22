@@ -45,18 +45,12 @@ module.exports = {
   },
 
   delete: async (req, res) => {
-    const data = await User.findOne({ _id: req.params.userId });
+    const data = await User.deleteOne({ _id: req.params.id })
 
-    if (data) {
-      await User.deleteOne(data);
-      res.send({
-        error: false,
-        message: "Successfully deleted",
-        deleted_data: data,
-      });
-    } else {
-      res.send("User Not Found");
-    }
+    res.status(data.deletedCount ? 204 : 404).send({
+        error: !data.deletedCount,
+        data
+    })
   },
 
   login: async (req, res) => {
