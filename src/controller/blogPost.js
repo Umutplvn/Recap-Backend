@@ -21,13 +21,18 @@ list:async(req, res)=>{
         const sort = req.query?.sort || {}
         
         //! Pagination  URL?page=1&limit=10
-        const limit= Number(req.query?.limit || (process.env?.PAGE_SIZE || 20))
-        let page= Number(req.query?.page || 1 )-1 
-        const skip= Number(req.query?.skip) || (page*limit)
+        let limit= Number(req.query?.limit)
+        limit=limit > 0 ? limit : Number (process.env?.PAGE_SIZE || 20)
+        let page= Number(req.query?.page)
+        page = (page > 0 ? page : 1 )-1
 
-        const data=await Blog.find(search).sort(sort).skip(skip).limit(limit)
+        let skip= Number(req.query?.skip) || (page*limit)
+
+
+        const data=await Blog.find(search).sort(sort).skip(skip).limit(limit).populate('categoryId')
 
         res.status(200).send({
+            count:data.length,
             error:false,
             categories:data,
             
